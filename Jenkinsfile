@@ -1,11 +1,17 @@
 pipeline {
     agent any
+    triggers {
+        pollscm "* * * * *"
+    }
     stages {
-        stage("build"){
+        stage('build') {
 
             steps{
-                echo 'build'
-                sleep 10
+                sh 'mvn clean'
+                sh 'mvn install'
+                sh 'mvn package'
+                sh 'mvn test'
+            
             }
         }
 
